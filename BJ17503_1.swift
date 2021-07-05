@@ -47,8 +47,7 @@ while stack.count < N && beerArr.count > 0 {
 if totalN < M {
     print(-1)
 } else {
-    stack = stack.sorted(by: {$0.level! > $1.level!})
-    print(stack[stack.startIndex].level!)
+    print(stack[stack.endIndex-1].level!)
 }
 
 
