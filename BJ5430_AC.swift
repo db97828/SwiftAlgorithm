@@ -130,7 +130,7 @@ for _ in 0..<T {
     
     if error {
         print("error")
-    } else if error == false && startIndex > endIndex {
+    } else if startIndex > endIndex {
         print("error")
     } else {
         if reversed {
