@@ -1,3 +1,5 @@
+//실패 -> 다시 풀어보기
+
 import Foundation
 
 let t = Int(readLine()!)!
