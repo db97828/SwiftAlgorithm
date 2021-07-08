@@ -1,3 +1,4 @@
+//실패 -> 다시풀어보기
 import Foundation
 
 struct BeerInfo {
