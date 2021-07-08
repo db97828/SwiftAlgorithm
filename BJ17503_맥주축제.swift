@@ -1,4 +1,4 @@
-//실패 -> 다시풀어보기
+//실패(시간초과) -> 다시풀어보기
 import Foundation
 
 struct BeerInfo {
