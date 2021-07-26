@@ -26,7 +26,6 @@ import Foundation
 
 // -> 성공 Stack 사용해서 풀기
  func solution(_ s:String) -> Int{
-     var answer:Int = -1
      var stack: [Character] = []
      
      for c in s {
@@ -36,9 +35,26 @@ import Foundation
              else { stack.append(c) }
          }
      }
-
-     if stack.isEmpty { answer = 1 }
-     else { answer = 0 }
      
-     return answer
+     return stack.isEmpty ? 1 : 0
  }
+
+// -> 다른 방법
+func solution(_ s:String) -> Int{
+    let str = Array(s)
+    var array: [Character] = []
+    
+    if str.count % 2 != 0 { return 0 }
+//    ==> guard str.count % 2 == 0 else { return 0 }
+    
+    for c in str {
+        array.append(c)
+        
+        while array.count > 1 && array[array.count-1] == array[array.count-2] {
+            array.removeLast()
+            array.removeLast()
+        }
+    }
+    
+    return array.isEmpty ? 1 : 0
+}
