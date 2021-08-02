@@ -28,3 +28,26 @@ func solution(_ record:[String]) -> [String] {
     
     return answer
 }
+
+//------------------------------------------------------------------------------
+// 다른 사람 풀이
+
+import Foundation
+
+func solution(_ record:[String]) -> [String] {
+    let actions = ["Enter":"님이 들어왔습니다.", "Leave":"님이 나갔습니다."]
+    var a = [String:String]()
+
+    record.forEach {
+    let separated = $0.components(separatedBy: " ")
+    if separated.count > 2 {
+        a[separated[1]] = separated[2]
+    }
+}
+
+return record.filter { !$0.contains("Change") }.map { (value:String) -> String in
+        let separated = value.components(separatedBy: " ")
+        let newString = a[separated[1]]! + actions[separated[0]]!
+        return newString
+}
+}
