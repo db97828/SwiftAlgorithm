@@ -3,7 +3,6 @@ import Foundation
 
 func solution_k번째수_1(_ array:[Int], _ commands:[[Int]]) -> [Int] {
     var answer: [Int] = []
-    
     commands.forEach{
         var array = array
         let i = $0[0]-1
