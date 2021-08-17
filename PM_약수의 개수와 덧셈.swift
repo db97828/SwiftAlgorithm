@@ -7,8 +7,9 @@ func solution약수의_개수와_덧셈_1(_ left:Int, _ right:Int) -> Int {
         for j in 1...i {
             if i % j == 0 { divisor += 1 }
         }
-        if divisor % 2 == 0 {answer += i}
-        else {answer -= i}
+//         if divisor % 2 == 0 {answer += i}
+//         else {answer -= i}
+        answer += divisor % 2 == 0 ? i : -i
     }
     return answer
 }
