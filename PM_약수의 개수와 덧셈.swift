@@ -21,6 +21,7 @@ func solution약수의_개수와_덧셈_2(_ left:Int, _ right:Int) -> Int {
 func solution약수의_개수와_덧셈_3(_ left:Int, _ right:Int) -> Int {
     var answer = 0
     for number in left...right {
+        //홀수 -> 제곱수 / 짝수 -> 제곱수X 이므로 제곱근 씌워서 정수인 것은 약수 홀수개 아니면 짝수개!!
         answer += floor(sqrt(Double(number))) == sqrt(Double(number)) ? -number : number
     }
     return answer
