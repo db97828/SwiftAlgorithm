@@ -17,3 +17,11 @@ func solution약수의_개수와_덧셈_1(_ left:Int, _ right:Int) -> Int {
 func solution약수의_개수와_덧셈_2(_ left:Int, _ right:Int) -> Int {
     return (left...right).map{ i in (1...i).filter{$0 % i == 0}.count % 2 == 0 ? i : -i}.reduce(0, +)
 }
+
+func solution약수의_개수와_덧셈_3(_ left:Int, _ right:Int) -> Int {
+    var answer = 0
+    for number in left...right {
+        answer += floor(sqrt(Double(number))) == sqrt(Double(number)) ? -number : number
+    }
+    return answer
+}
