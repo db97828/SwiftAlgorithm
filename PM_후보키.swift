@@ -1,3 +1,5 @@
+import Foundation
+
 var combiArr = [[Int]]()
 
 func solution(_ relation:[[String]]) -> Int {
