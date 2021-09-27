@@ -90,3 +90,79 @@ import Foundation
 //    return mst
 //}
 //
+
+
+/*
+ 첫째 줄에 정점의 개수 V(1 ≤ V ≤ 10,000)와 간선의 개수 E(1 ≤ E ≤ 100,000)가 주어진다.
+ 다음 E개의 줄에는 각 간선에 대한 정보를 나타내는 세 정수 A, B, C가 주어진다.
+ 이는 A번 정점과 B번 정점이 가중치 C인 간선으로 연결되어 있다는 의미이다.
+ C는 음수일 수도 있으며, 절댓값이 1,000,000을 넘지 않는다.
+
+ 그래프의 정점은 1번부터 V번까지 번호가 매겨져 있고,
+ 임의의 두 정점 사이에 경로가 있다.
+ 최소 스패닝 트리의 가중치가 -2,147,483,648보다 크거나 같고, 2,147,483,647보다 작거나 같은 데이터만 입력으로 주어진다.
+ 
+ 예제 입력 1
+ 3 3
+ 1 2 1
+ 2 3 2
+ 1 3 3
+ 
+ 예제 출력 1
+ 3
+ */
+
+//실패 -> 다시풀기
+
+//let input = readLine()!.split(separator: " ").map{Int(String($0))!}
+//let v = input[0]        //꼭짓점갯수
+//let e = input[1]        //간선정보
+//
+//typealias edge = (Int, Int, Int)
+//
+//let vertices = Array(0...v)
+//var edges = [edge]()
+//
+//for _ in 0..<e {
+//    let edgeInfo = readLine()!.split(separator: " ").map{Int(String($0))!}
+//    edges.append((edgeInfo[0],edgeInfo[1],edgeInfo[2]))
+//}
+//
+//print(kruskal(edges, vertices))
+//
+//func kruskal(_ edges:[edge], _ vertices:[Int]) -> Int{
+//    var mst = [edge]()
+//
+//    var edges = edges.sorted{ $0.2 < $1.2 }
+//
+//    var parent = vertices
+//    var rank = [Int](repeating: 0, count: vertices.count+1)
+//
+//    while mst.count < vertices.count-2 {
+//        let node = edges.removeFirst()
+//        if find(node.0) != find(node.1) {
+//            union(node.0, node.1)
+//            mst.append(node)
+//        }
+//    }
+//
+//    func find(_ node:Int) -> Int {
+//        if parent[node] != node {
+//            parent[node] = find(parent[node])
+//        }
+//        return parent[node]
+//    }
+//
+//    func union(_ node1:Int, _ node2:Int) {
+//        let root1 = find(node1)
+//        let root2 = find(node2)
+//
+//        if node1 < node2 {
+//            parent[root1] = root2
+//        } else {
+//            parent[root2] = root1
+//        }
+//    }
+//
+//    return mst.map{$0.2}.reduce(0, +)
+//}
