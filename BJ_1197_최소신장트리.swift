@@ -30,67 +30,66 @@
 
 import Foundation
 
-//let vertices = ["A","B","C","D"]
-//let edges = [
-//    (5,  "A", "B"),
-//    (1,  "A", "C"),
-//    (10, "A", "D"),
-//    (5,  "B", "A"),
-//    (3,  "B", "D"),
-//    (1,  "C", "A"),
-//    (8,  "C", "D"),
-//    (10, "D", "A"),
-//    (3,  "D", "B"),
-//    (8,  "D", "C"),
-//]
-//
-//typealias edge = (Int, String, String)
-//
-//
-//func kruskal(_ vertices:[String], _ edges:[edge]) -> [edge] {
-//    var mst = [edge]()
-//    var edges = edges.sorted{ $0.0 < $1.0 }
-//
-//    var rank = [String:Int]()
-//    var parent = [String:String]()
-//
-//    for vertex in vertices {
-//        rank.updateValue(0, forKey: vertex)
-//        parent.updateValue(vertex, forKey: vertex)
-//    }
-//
-//    func find(_ node:String) -> String {
-//        if node != parent[node]! {
-//            parent[node] = find(parent[node]!)
-//        }
-//        return parent[node]!
-//    }
-//
-//    func union(_ node1:String, _ node2:String) {
-//        let rank1 = find(node1)
-//        let rank2 = find(node2)
-//
-//        if rank[rank1]! > rank[rank2]! {
-//            parent[rank2] = rank1
-//        } else {
-//            parent[rank1] = rank2
-//            if rank[rank1]! == rank[rank2]! {
-//                rank[rank2]! += 1
-//            }
-//        }
-//    }
-//
-//    while mst.count < vertices.count-1 {
-//        let node = edges.removeFirst()
-//        if find(node.1) != find(node.2) {
-//            union(node.1, node.2)
-//            mst.append(node)
-//        }
-//    }
-//    return mst
-//}
-//
+func 최소신장트리_개념정리() {
+    let vertices = ["A","B","C","D"]
+    let edges = [
+        (5,  "A", "B"),
+        (1,  "A", "C"),
+        (10, "A", "D"),
+        (5,  "B", "A"),
+        (3,  "B", "D"),
+        (1,  "C", "A"),
+        (8,  "C", "D"),
+        (10, "D", "A"),
+        (3,  "D", "B"),
+        (8,  "D", "C"),
+    ]
 
+    typealias edge = (Int, String, String)
+
+    func kruskal(_ vertices:[String], _ edges:[edge]) -> [edge] {
+        var mst = [edge]()
+        var edges = edges.sorted{ $0.0 < $1.0 }
+
+        var rank = [String:Int]()
+        var parent = [String:String]()
+
+        for vertex in vertices {
+            rank.updateValue(0, forKey: vertex)
+            parent.updateValue(vertex, forKey: vertex)
+        }
+
+        func find(_ node:String) -> String {
+            if node != parent[node]! {
+                parent[node] = find(parent[node]!)
+            }
+            return parent[node]!
+        }
+
+        func union(_ node1:String, _ node2:String) {
+            let rank1 = find(node1)
+            let rank2 = find(node2)
+
+            if rank[rank1]! > rank[rank2]! {
+                parent[rank2] = rank1
+            } else {
+                parent[rank1] = rank2
+                if rank[rank1]! == rank[rank2]! {
+                    rank[rank2]! += 1
+                }
+            }
+        }
+
+        while mst.count < vertices.count-1 {
+            let node = edges.removeFirst()
+            if find(node.1) != find(node.2) {
+                union(node.1, node.2)
+                mst.append(node)
+            }
+        }
+        return mst
+    }
+}
 
 /*
  첫째 줄에 정점의 개수 V(1 ≤ V ≤ 10,000)와 간선의 개수 E(1 ≤ E ≤ 100,000)가 주어진다.
@@ -112,57 +111,46 @@ import Foundation
  3
  */
 
-//실패 -> 다시풀기
-
-//let input = readLine()!.split(separator: " ").map{Int(String($0))!}
-//let v = input[0]        //꼭짓점갯수
-//let e = input[1]        //간선정보
-//
-//typealias edge = (Int, Int, Int)
-//
-//let vertices = Array(0...v)
-//var edges = [edge]()
-//
-//for _ in 0..<e {
-//    let edgeInfo = readLine()!.split(separator: " ").map{Int(String($0))!}
-//    edges.append((edgeInfo[0],edgeInfo[1],edgeInfo[2]))
-//}
-//
-//print(kruskal(edges, vertices))
-//
-//func kruskal(_ edges:[edge], _ vertices:[Int]) -> Int{
-//    var mst = [edge]()
-//
-//    var edges = edges.sorted{ $0.2 < $1.2 }
-//
-//    var parent = vertices
-//    var rank = [Int](repeating: 0, count: vertices.count+1)
-//
-//    while mst.count < vertices.count-2 {
-//        let node = edges.removeFirst()
-//        if find(node.0) != find(node.1) {
-//            union(node.0, node.1)
-//            mst.append(node)
-//        }
-//    }
-//
-//    func find(_ node:Int) -> Int {
-//        if parent[node] != node {
-//            parent[node] = find(parent[node])
-//        }
-//        return parent[node]
-//    }
-//
-//    func union(_ node1:Int, _ node2:Int) {
-//        let root1 = find(node1)
-//        let root2 = find(node2)
-//
-//        if node1 < node2 {
-//            parent[root1] = root2
-//        } else {
-//            parent[root2] = root1
-//        }
-//    }
-//
-//    return mst.map{$0.2}.reduce(0, +)
-//}
+func solution1197_최소신장트리_1() {
+    let input = readLine()!.split(separator: " ").map{Int(String($0))!}
+    let v = input[0]        //꼭짓점갯수
+    let e = input[1]        //간선정보
+    
+    var parent = Array(0...v)
+    var graph = [[Int]]()
+    var lines = 0
+    var result = 0
+    
+    for _ in 0..<e {
+        graph.append(readLine()!.split(separator: " ").map{Int(String($0))!})
+    }
+    
+    graph.sort{ (a,b) -> Bool in
+        return a[2] < b[2]
+    }
+    
+    for index in 0..<graph.count {
+        if lines == v - 1 {
+            break
+        }
+        if findParent(graph[index][0]) != findParent(graph[index][1]) {
+            result += graph[index][2]
+            lines += 1
+            unionParent(graph[index][0], graph[index][1])
+        }
+    }
+    
+    print(result)
+    
+    func findParent(_ index:Int) -> Int {
+        if parent[index] != index { parent[index] = findParent(parent[index]) }
+        return parent[index]
+    }
+    
+    func unionParent(_ a:Int, _ b:Int) {
+        let num1 = findParent(a)
+        let num2 = findParent(b)
+        if a < b { parent[num2] = num1 }
+        else { parent[num1] = num2 }
+    }
+}
