@@ -9,7 +9,7 @@ import Foundation
 
 func solution3109_빵집() {
     let dc = [1,1,1]
-    let dr = [-1,0,1]
+    let dr = [-1,0,1]           //최대갯수를 얻기 위해서는 -1, 0, 1순서로 해야한다(위쪽부터 찾아야 더 많이 찾을 수 있음)
     var answer = 0
     
     let input = readLine()!.split(separator: " ").map{Int(String($0))!}
