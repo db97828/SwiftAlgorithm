@@ -11,3 +11,5 @@ func gcd(_ a: Int64, _ b: Int64) -> Int64 {
     if b == 0 { return a }
     else { return gcd(b, a%b)}
 }
+
+//일차함수로 생각하고 풀어보기
