@@ -7,7 +7,7 @@
 
 import Foundation
 
-func solution_파일명_정렬_1(_ files:[String]) -> [String] {
+ffunc solution_파일명_정렬_1(_ files:[String]) -> [String] {
     //tail이 null인 경우 확인하기!
     struct File {
         var origin:String
@@ -48,9 +48,36 @@ func solution_파일명_정렬_1(_ files:[String]) -> [String] {
     return sortedFiles.sorted{ $0.head == $1.head ? $0.number < $1.number : $0.head < $1.head }.map{$0.origin}
 }
 
+func solution_파일명_정렬_2(_ files:[String]) -> [String] {
+    //1번 코드 정리
+    struct File {
+        var origin:String
+        var head:String
+        var number:Int
+    }
+
+    var sortedFiles = [File]()
+    for file in files {
+        var head = ""
+        var number = ""
+        for ch in file {
+            if !ch.isNumber {
+                if number == "" { head.append(ch.lowercased()) }
+                else { break }
+            } else {
+                if number.count <= 5 { number.append(ch) }
+                else { break }
+            }
+        }
+        sortedFiles.append(File(origin: file, head: head, number: Int(number)!))
+    }
+    
+    return sortedFiles.sorted{ $0.head == $1.head ? $0.number < $1.number : $0.head < $1.head }.map{$0.origin}
+}
+
 
 //extension 활용하기.....bb
-func solution_파일명_정렬_2(_ files:[String]) -> [String] {
+func solution_파일명_정렬_3(_ files:[String]) -> [String] {
     return files.enumerated().sorted{ (lhs, rhs) in
         let l = lhs.element
         let r = rhs.element
