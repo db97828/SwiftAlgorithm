@@ -63,3 +63,32 @@ func solution_삼각_달팽이_1(_ n:Int) -> [Int] {
 
     return []
 }
+
+func solution_삼각_달팽이_2(_ n:Int) -> [Int] {
+    let dx = [0,1,-1]
+    let dy = [1,0,-1]
+    var answer = [[Int]]()
+    (1...n).forEach{ answer.append([Int](repeating: 0, count: $0))}
+    var num = 1
+    var row = 0
+    var col = 0
+    var dir = 0
+    
+    (1...n).reversed().forEach{
+        (0 ..< $0-1).forEach { _ in
+            answer[row][col] = num
+            col += dx[dir]
+            row += dy[dir]
+            num += 1
+        }
+        
+        answer[row][col] = num
+        num += 1
+        dir = (dir + 1) % 3
+        col += dx[dir]
+        row += dy[dir]
+    }
+    
+    return answer.reduce(into: [Int]()) { $0.append(contentsOf: $1) }
+}
+
