@@ -4,6 +4,7 @@ import Foundation
 //print(numUniqueEmails(["a@leetcode.com","b@leetcode.com","c@leetcode.com"]))
 //print(numUniqueEmails(["test.email+alex@leetcode.com","test.email.leet+alex@code.com"]))
 class Solution {
+        /* 내 코드 */
     func numUniqueEmails(_ emails: [String]) -> Int {
         var answer: Set<String> = []
         
@@ -14,6 +15,57 @@ class Solution {
         }
         return answer.count
     }
+    
+        /* 제일 시간 짧은 코드 */
+    func numUniqueEmails(_ emails: [String]) -> Int {
+        var answer: [String: Int] = [:]
+        for email in emails {
+            var left: String = ""
+            var right: String = ""
+            var foundAt: Bool = false
+            var foundPlus: Bool = false
+            for e in email {
+                if foundAt {
+                    right.append(e)
+                } else {
+                    if e == "@" {
+                        foundAt = true
+                    } else if e == "+" {
+                        foundPlus = true
+                    } else if e != "." && foundPlus == false {
+                        left.append(e)
+                    }
+                }
+            }
+            answer[left+"@"+right] = 1
+        }
+
+        return answer.count
+    }
+    
+    /* 그 다음 시간 짧은 코드 */
+    struct Email: Hashable {
+        var localName: String
+        var domainName: String
+
+        init?(_ email: String) {
+            let email = email.components(separatedBy: "@")
+            var name = ""
+            for e in email[0] {
+                if e == "." { continue }
+                else if e == "+" { break }
+                name.append(e)
+            }
+            self.localName = name
+            self.domainName = email[1]
+        }
+    }
+
+    func numUniqueEmails(_ emails: [String]) -> Int {
+        let answer = Set<Email>(emails.compactMap { Email($0) })
+        return answer.count
+    }
+
 }
 
 
