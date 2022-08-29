@@ -23,12 +23,14 @@ class Solution_274 {
         return answer
     }
     
-    func hIndex(_ citations: [Int]) -> Int {
+    func hIndex_2(_ citations: [Int]) -> Int {
         let c = citations.count
         
-        return citations.sorted()
-            .enumerated()
-            .reduce(into: Int(0), { $0 = $1.1 >= c - $1.0 ? max(c - $1.0, $0) : $0 })   // 더 공부해보기...
+        return citations.sorted()       //정렬
+            .enumerated()               //index와 value값 받기
+            .reduce(into: Int(0), { $0 = $1.1 >= c - $1.0 ? max(c - $1.0, $0) : $0 })
+        // value >= count - index -> 참이면 count-index 와 이전 값 중 큰 값 넣기
+        //                        -> 거짓이면 이전값 유지
     }
 
 }
